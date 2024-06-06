@@ -46,6 +46,19 @@ export async function signOut() {
     throw new Error("User could not be signed out");
   }
 }
+export async function addMyHotel(hotelFormData: FormData) {
+  const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
+    method: "POST",
+    credentials: "include",
+    body: hotelFormData,
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to register hotel");
+  }
+
+  return response.json();
+}
 
 export async function validateToken() {
   const response = await fetch(`${API_BASE_URL}/api/auth/validate-token`, {
