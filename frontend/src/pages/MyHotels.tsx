@@ -2,12 +2,14 @@ import { useQuery } from "react-query";
 import * as apiClient from "../api-client";
 import { Link } from "react-router-dom";
 import { BsBuilding, BsMap } from "react-icons/bs";
-import { BiHotel, BiMap, BiMoney, BiStar } from "react-icons/bi";
+import { BiHotel, BiMoney, BiStar } from "react-icons/bi";
 
 export default function MyHotels() {
-  const { data: hotelData } = useQuery("Get Hotels", apiClient.fetchMyHotels, {
-    onError: (err) => {},
-  });
+  const { data: hotelData } = useQuery(
+    "Get Hotels",
+    apiClient.fetchMyHotels,
+    {}
+  );
 
   if (!hotelData) {
     return (

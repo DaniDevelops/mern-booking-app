@@ -1,6 +1,6 @@
 import { registerFormData } from "./pages/Register";
 import { signInFormData } from "./pages/SignIn";
-import { HotelType } from "../../backend/src/models/hotel";
+import { HotelType } from "../../backend/src/shared/type";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 export async function register(formData: registerFormData) {
   const response = await fetch(`${API_BASE_URL}/api/users/register`, {
