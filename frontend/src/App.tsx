@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import SignIn from "./pages/SignIn";
 import AddHotel from "./pages/AddHotel";
 import { useAppContext } from "./context/AppContext";
+import MyHotels from "./pages/MyHotels";
 
 function App() {
   const { isLoggedIn } = useAppContext();
@@ -17,7 +18,12 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<SignIn />} />
-            {isLoggedIn && <Route path="/add-hotel" element={<AddHotel />} />}
+            {isLoggedIn && (
+              <>
+                <Route path="/add-hotel" element={<AddHotel />} />
+                <Route path="/my-hotels" element={<MyHotels />} />
+              </>
+            )}
           </Route>
         </Routes>
       </BrowserRouter>

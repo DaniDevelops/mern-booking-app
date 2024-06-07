@@ -6,7 +6,7 @@ import * as apiClient from "../api-client";
 export default function AddHotel() {
   const { mutate, isLoading } = useMutation(apiClient.addMyHotel, {
     onSuccess: () => {
-      toast.success("Hotel Saved!");
+      toast.success("HotelSaved!");
     },
     onError: () => {
       toast.error("Error saving Hotel");

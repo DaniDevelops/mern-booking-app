@@ -22,13 +22,13 @@ export default function Header() {
             <>
               <Link
                 to="/my-bookings"
-                className="flex items-center text-white px-3 font-bold hover:bg-gray-100 "
+                className="flex items-center text-white px-3 font-bold hover:bg-blue-600"
               >
                 My Bookings
               </Link>
               <Link
                 to="/my-hotels"
-                className="flex items-center  text-white px-3 font-bold hover:bg-gray-100 "
+                className="flex items-center  text-white px-3 font-bold hover:bg-blue-600 "
               >
                 My Hotels
               </Link>
