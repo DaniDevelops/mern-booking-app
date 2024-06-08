@@ -42,13 +42,7 @@ router.post(
 
       // upload hotel image to cloudinary
 
-      const uploadPromises = imageFiles.map(async (image) => {
-        const b64 = Buffer.from(image.buffer).toString("base64");
-        const dataURI = "data:" + image.mimetype + ";base64," + b64;
-        const res = await cloudinary.v2.uploader.upload(dataURI);
-        return res.url;
-      });
-      const imageUrls = await Promise.all(uploadPromises);
+      const imageUrls = await uploadImages(imageFiles);
 
       // if upload was successful send the image URLs
 
@@ -76,8 +70,69 @@ router.get("/", verifyToken, async (req: Request, res: Response) => {
     const hotels = await Hotel.find({ userId: req.userId });
     res.json(hotels);
   } catch (error) {
+    res.status(500).send({ message: "Error Fetching Hotels" });
+  }
+});
+
+router.put(
+  "/:hotelId",
+  verifyToken,
+  upload.array("imageFiles", 6),
+  async (req: Request, res: Response) => {
+    const id = req.params.hotelId;
+    try {
+      const updatedHotel: HotelType = req.body;
+      updatedHotel.lastUpdated = new Date();
+
+      const hotel = await Hotel.findOneAndUpdate(
+        {
+          _id: id,
+          userId: req.userId,
+        },
+        updatedHotel,
+        { new: true }
+      );
+
+      if (!hotel) {
+        throw new Error("Hotel not found");
+      }
+
+      const updatedImageFiles = req.files as Express.Multer.File[];
+      const UpdatedImageUrls = await uploadImages(updatedImageFiles);
+      hotel.imageUrls = [
+        ...UpdatedImageUrls,
+        ...(updatedHotel.imageUrls || []),
+      ];
+      await hotel.save();
+      res.status(201).json(hotel);
+    } catch (error) {
+      res.status(200).json({ message: "something went wrong" });
+    }
+  }
+);
+
+router.get("/:id", verifyToken, async (req: Request, res: Response) => {
+  const id = req.params.id.toString();
+  try {
+    const hotel = await Hotel.findOne({
+      _id: id,
+      userId: req.userId,
+    });
+    res.json(hotel);
+  } catch (error) {
     res.status(500).send({ message: "Error Fetching Hotel" });
   }
 });
+
+async function uploadImages(imageFiles: Express.Multer.File[]) {
+  const uploadPromises = imageFiles.map(async (image) => {
+    const b64 = Buffer.from(image.buffer).toString("base64");
+    const dataURI = "data:" + image.mimetype + ";base64," + b64;
+    const res = await cloudinary.v2.uploader.upload(dataURI);
+    return res.url;
+  });
+  const imageUrls = await Promise.all(uploadPromises);
+  return imageUrls;
+}
 
 export default router;

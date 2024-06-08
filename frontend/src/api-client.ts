@@ -70,6 +70,34 @@ export async function fetchMyHotels(): Promise<HotelType[]> {
 
   return response.json();
 }
+export async function fetchMyHotelById(hotelId: string): Promise<HotelType> {
+  const response = await fetch(`${API_BASE_URL}/api/my-hotels/${hotelId}`, {
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Error fetching Hotel");
+  }
+
+  return response.json();
+}
+
+export async function updateMyHotelbyId(hotelFormData: FormData) {
+  const response = await fetch(
+    `${API_BASE_URL}/api/my-hotels/${hotelFormData.get("hotelId")}`,
+    {
+      method: "PUT",
+      body: hotelFormData,
+      credentials: "include",
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Error Updating Hotel");
+  }
+
+  return response.json();
+}
 export async function validateToken() {
   const response = await fetch(`${API_BASE_URL}/api/auth/validate-token`, {
     credentials: "include",

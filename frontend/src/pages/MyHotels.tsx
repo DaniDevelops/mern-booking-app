@@ -37,7 +37,10 @@ export default function MyHotels() {
       </span>
       <div className="grid grid-cols-1 gap-8">
         {hotelData.map((hotel) => (
-          <div className="flex flex-col justify-between border border-slate-300 rounded-lg p-8 gap-5">
+          <div
+            key={hotel._id}
+            className="flex flex-col justify-between border border-slate-300 rounded-lg p-8 gap-5"
+          >
             <h2 className="text-2xl font-bold ">{hotel.name}</h2>
             <div className="whitespace-pre-line">{hotel.description}</div>
             <div className="grid grid-cols-5 gap-1">
@@ -63,7 +66,7 @@ export default function MyHotels() {
             </div>
             <span className="flex justify-end">
               <Link
-                to={`/edit-hotels/${hotel._id}`}
+                to={`/edit-hotel/${hotel._id}`}
                 className="flex bg-blue-600 text-white p-2 font-bold text-xl "
               >
                 View Details
