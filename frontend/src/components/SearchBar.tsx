@@ -3,10 +3,11 @@ import { useSearchContext } from "../context/SearchContext";
 import { MdTravelExplore } from "react-icons/md";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchBar() {
   const search = useSearchContext();
-
+  const navigate = useNavigate();
   const minDate = new Date();
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() + 1);
@@ -26,6 +27,8 @@ export default function SearchBar() {
       adultCount,
       childCount
     );
+
+    navigate("/search");
   }
 
   return (
@@ -95,11 +98,14 @@ export default function SearchBar() {
         />
       </div>
       <div className="flex gap-1">
-        <button className="w-2/3 text-white bg-blue-600 h-full p-2 font-bold text-xl hover:bg-blue-500">
+        <button
+          onClick={handleSubmit}
+          className="w-2/3 text-white bg-blue-600 h-full p-2 font-bold text-xl hover:bg-blue-500"
+        >
           Search
         </button>
         <button className="w-1/3 text-white bg-red-600 h-full p-2 font-bold text-xl hover:bg-red-500">
-          Search
+          Clear
         </button>
       </div>
     </form>
