@@ -29,7 +29,7 @@ export default function GuestsSection() {
           Children
           <input
             type="number"
-            min={1}
+            min={0}
             className="border rounded w-full py-1 px-2 font-normal"
             {...register("childCount", {
               required: "This field is required",

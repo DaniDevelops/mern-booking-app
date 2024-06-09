@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import * as apiClient from "../api-client";
 import { useMutation, useQueryClient } from "react-query";
 import toast from "react-hot-toast";
@@ -12,11 +12,12 @@ export type signInFormData = {
 export default function SignIn() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const location = useLocation();
   const { mutate } = useMutation(apiClient.signIn, {
     onSuccess: async () => {
       toast.success("You have successfully signed in");
       await queryClient.invalidateQueries("validateToken");
-      navigate("/");
+      navigate(location.state?.from?.pathname || "/");
     },
     onError: (error: Error) => {
       toast.error(error.message);

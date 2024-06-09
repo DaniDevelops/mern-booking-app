@@ -45,6 +45,14 @@ export async function searchHotels(
 
   return response.json();
 }
+export async function fetchHotelById(hotelId: string): Promise<HotelType> {
+  const response = await fetch(`${API_BASE_URL}/api/hotels/${hotelId}`);
+  if (!response.ok) {
+    throw new Error("Error Fetching this hotel");
+  }
+
+  return response.json();
+}
 export async function register(formData: registerFormData) {
   const response = await fetch(`${API_BASE_URL}/api/users/register`, {
     method: "POST",
