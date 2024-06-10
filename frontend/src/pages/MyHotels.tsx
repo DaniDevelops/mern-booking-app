@@ -29,7 +29,7 @@ export default function MyHotels() {
       <span className="flex justify-between">
         <h1 className="text-3xl font-bold">My Hotels</h1>
         <Link
-          to="/add-hotels"
+          to="/add-hotel"
           className="flex bg-blue-600 text-white p-2 font-bold text-xl "
         >
           Add Hotel

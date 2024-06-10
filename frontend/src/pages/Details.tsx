@@ -32,7 +32,7 @@ export default function Details() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {hotelData.imageUrls.map((image) => (
-          <div className="h-[300px]">
+          <div key={image} className="h-[300px]">
             <img
               src={image}
               alt={hotelData.name}
@@ -44,7 +44,10 @@ export default function Details() {
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">
         {hotelData.facilities.map((facility) => (
-          <div className="border border-slate-300 rounded-sm p-3">
+          <div
+            key={facility}
+            className="border border-slate-300 rounded-sm p-3"
+          >
             {facility}
           </div>
         ))}

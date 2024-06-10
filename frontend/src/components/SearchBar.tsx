@@ -80,7 +80,7 @@ export default function SearchBar() {
           endDate={checkOut}
           minDate={minDate}
           maxDate={maxDate}
-          placeholderText="Check In Date"
+          placeholderText="Check-In Date"
           wrapperClassName="min-w-full"
         />
       </div>
@@ -93,7 +93,7 @@ export default function SearchBar() {
           endDate={checkOut}
           minDate={minDate}
           maxDate={maxDate}
-          placeholderText="Check In Date"
+          placeholderText="Check-Out Date"
           wrapperClassName="min-w-full"
         />
       </div>

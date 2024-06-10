@@ -69,6 +69,8 @@ export default function ManageHotelForm({ onSave, isLoading, hotel }: Props) {
     });
 
     onSave(formData);
+
+    if (!hotel) reset();
   }
   return (
     <FormProvider {...formMethods}>

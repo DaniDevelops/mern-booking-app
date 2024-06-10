@@ -116,7 +116,7 @@ export default function Search() {
           </select>
         </div>
         {hotelData?.data.map((hotel) => (
-          <SearchResultsCard hotel={hotel} />
+          <SearchResultsCard key={hotel._id} hotel={hotel} />
         ))}
         <div className="">
           <Pagination
